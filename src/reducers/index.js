@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import restaurants from './restaurants'
-import user from './user'
+import map from './map';
+import auth from './auth'
 
 export default combineReducers({
-    user,
-    restaurants
+    auth,
+    restaurants,
+    map
 })

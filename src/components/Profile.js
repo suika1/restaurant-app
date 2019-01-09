@@ -2,7 +2,6 @@ import React from 'react';
 import {Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {Link, NavLink, Redirect} from "react-router-dom";
 
 const styles = {
     profile: {
@@ -14,10 +13,11 @@ const styles = {
       display: 'flex',
     },
     avatar: {
-        backgroundColor: '#ff3c27',
+        //backgroundColor: '#ff3c27',
         width: '100px',
         height: '100px',
         borderRadius: '100px',
+        marginRight: '25px',
     },
     username: {
         color: '#7b12cc',
@@ -33,42 +33,51 @@ const styles = {
     }
 };
 
-class Profile extends React.Component{
-
-    // renderRestaurants = () => {
-    //     return (
-    //         <p>Here will be my restaurants</p>
-    //     )
-    // };
-
-    render(){
+class Profile extends React.PureComponent{
+    renderAnonymous = () => {
         let { classes } = this.props;
         return (
             <div className={classes.profile}>
                 <div className={classes.about}>
-                    <div className={classes.avatar}>
-                        <p>Here will be Avatar</p>
+                    <div className={classes.avatar} style={{}}>
                     </div>
                     <div className={classes['user-info']}>
-                        <Typography className={classes.username}>name</Typography>
-                        <p>email</p>
+                        <Typography className={classes.username}>Anonymous</Typography>
                     </div>
                 </div>
-                {/*<div className={classes['my-restaurants']}>*/}
-                    {/*<h3>My restaurants</h3>*/}
-                    {/*{this.renderRestaurants()}*/}
-                {/*</div>*/}
             </div>
+        )
+    };
 
+    render(){
+        let { classes } = this.props;
+        let { imageUrl, fullName, email } = this.props.auth;
+        if (fullName === ''){
+            return this.renderAnonymous();
+        }
+        return (
+            <div className={classes.profile}>
+                <div className={classes.about}>
+                    <div className={classes.avatar} style={{backgroundImage: `url("${imageUrl}")`}} >
+                    </div>
+                    <div className={classes['user-info']}>
+                        <Typography className={classes.username}>{fullName}</Typography>
+                        <Typography className={classes.username}>{email}</Typography>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
 
 Profile.propTypes = {
-    avatarLink: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    //email maybe
-    //restaurants: PropTypes.array.isRequired,
+    user: PropTypes.shape({
+        imageUrl: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        familyName: PropTypes.string.isRequired,
+        fullName: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+    }),
 };
 
 export default withStyles(styles)(Profile);

@@ -1,111 +1,91 @@
 import React from 'react';
-import {List, Button, Fab, Typography, TextField} from '@material-ui/core';
+import {Fab, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import { NavLink } from 'react-router-dom';
+import RestaurantSmallCard from "./RestaurantSmallCard";
 
 const styles = {
-
+    list: {
+        width: '90%',
+        maxWidth: '1000px',
+        margin: '30px auto',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gridTemplateRows: '1fr',
+    },
+    loadingMessage: {
+        margin: '20px auto',
+        width: 'max-content',
+    },
+    relocateContainer: {
+        margin: '20px auto',
+        width: 'max-content',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+    },
+    relocateMessage: {
+        marginTop: '15px',
+        textDecoration: 'none',
+        width: 'max-content',
+    }
 };
 
 class RestaurantList extends React.Component {
     renderList = () => {
-        return (
-            <Typography variant='h3'>Page with full list of restaurants</Typography>
-        )
+        let {classes, restaurants, needsGeolocation} = this.props;
+        if (!restaurants.items) {
+            return;
+        }
+        if (needsGeolocation){
+            return (
+                <div className={classes.relocateContainer}>
+                    <Typography variant='h4'>You need to select place in which you are located.</Typography>
+                    <NavLink className={classes.relocateMessage} to='map'><Fab color="primary">Go</Fab></NavLink>
+            </div>
+            )
+        }
+
+        return restaurants.items.map(a => (<RestaurantSmallCard key={a.id} restaurant={a}/>));
+    };
+
+    renderLoading = () => {
+        if (this.props.restaurants.isFetching){
+            return (<Typography className={this.props.classes.loadingMessage} variant='h3'>...loading</Typography>)
+        }
     };
 
     render(){
+        let {classes} = this.props;
         return (
-            <div className='restaurant-list'>
+            <div className={classes.listComponent}>
                 <Typography variant='h2'>Full restaurant list</Typography>
-                {this.renderList()}
+                <div className={classes.list}>
+                    {this.renderList()}
+                </div>
+                {this.renderLoading()}
             </div>
         )
     }
 }
 
 RestaurantList.propTypes = {
-    list: PropTypes.array.isRequired,
+    restaurants: PropTypes.shape({
+        error: PropTypes.string.isRequired,
+        isFetching: PropTypes.bool.isRequired,
+        items: PropTypes.arrayOf(
+            PropTypes.shape({
+                id: PropTypes.string.isRequired,
+                photos: PropTypes.array,
+                name: PropTypes.string.isRequired,
+                rating: PropTypes.number,
+                vicinity: PropTypes.string.isRequired
+            })
+        ).isRequired,
+    }).isRequired,
 };
 
 
 export default withStyles(styles)(RestaurantList);
-
-/*
-
-import React from 'react';
-import {List, Button, Fab, Typography, TextField} from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import {Link, NavLink, Redirect} from "react-router-dom";
-
-const styles = {
-    profile: {
-        width: '100%',
-        maxWidth: '1000px',
-        margin: '20px auto',
-    },
-    about: {
-      display: 'flex',
-    },
-    avatar: {
-        backgroundColor: '#ff3c27',
-        width: '100px',
-        height: '100px',
-        borderRadius: '100px',
-    },
-    username: {
-        color: '#7b12cc',
-    },
-    'user-info': {
-        backgroundColor: '#afbabb',
-        width: 'calc(100% - 100px)',
-    },
-    'my-restaurants': {
-        width: '80%',
-        backgroundColor: '#a3aebb',
-        margin: '10px auto',
-    }
-};
-
-class Profile extends React.Component{
-
-    renderRestaurants = () => {
-        return (
-            <p>Here will be my restaurants</p>
-        )
-    };
-
-    render(){
-        let { classes } = this.props;
-        return (
-            <div className={classes.profile}>
-                <div className={classes.about}>
-                    <div className={classes.avatar}>
-                        <p>Here will be Avatar</p>
-                    </div>
-                    <div className={classes['user-info']}>
-                        <Typography className={classes.username}>name</Typography>
-                        <p>email</p>
-                    </div>
-                </div>
-                <div className={classes['my-restaurants']}>
-                    <h3>My restaurants</h3>
-                    {this.renderRestaurants()}
-                </div>
-            </div>
-
-        );
-    }
-}
-
-Profile.propTypes = {
-    avatarLink: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-    //email maybe
-    restaurants: PropTypes.array.isRequired,
-};
-
-export default withStyles(styles)(Profile);
-
-*/
