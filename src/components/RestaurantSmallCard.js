@@ -12,6 +12,11 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
+        boxShadow: '0 0 5px 0.2px #bdbdbd',
+        '&:first-child': {
+          width: 'calc(100% - 16px)',
+          textAlign: 'center',
+        },
         '&:last-child': {
             marginBottom: '40px',
         }

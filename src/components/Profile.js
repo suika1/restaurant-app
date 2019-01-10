@@ -26,7 +26,6 @@ const styles = {
     'user-info': {
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center',
         justifyContent: 'space-around',
         width: 'calc(100% - 100px)',
     },

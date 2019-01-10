@@ -15,24 +15,26 @@ const styles = {
         height: '100%',
     },
     topMenu: {
-        margin: '10px auto',
-        marginTop: '0',
-        width: 'max-content',
+        margin: '0 auto',
+        width: '100%',
+        height: '40px',
         display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#9c28b1',
     },
     link: {
+        height: '38px',
         textDecoration: 'none',
-        '&:active': {
-            color: 'black',
-        },
+    },
+    activeLink: {
+        backgroundColor: '#7920a2',
     },
     buttonLink: {
+        border: '1px solid #721d82',
         '&:hover': {
-            backgroundColor: '#ffc2ec',
+            backgroundColor: '#e1bee8',
         },
-    },
-    active: {
-        backgroundColor: "#ff218a",
     },
     relocateText: {
         margin: '10px auto',
@@ -118,12 +120,13 @@ class App extends React.Component{
     render(){
         //TODO: if user isn't authorized - ask him to login
         let {classes} = this.props;
+        let pathName = this.props.location.pathname;
         return(
             <div className={classes.app}>
                 <div className={classes.topMenu}>
-                    <Link className={classes.link} to='/'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/' ? classes.active : ''}`}>Profile</Button></Link>
-                    <Link className={classes.link} to='/list'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/list' ? classes.active : ''}`}>Restaurants</Button></Link>
-                    <Link className={classes.link} to='/map'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/map' ? classes.active : ''}`}>Map</Button></Link>
+                    <Link className={`${classes.link} ${pathName === '/' ? classes.activeLink : ''}`} to='/'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/' ? classes.active : ''}`}>Profile</Button></Link>
+                    <Link className={`${classes.link} ${pathName === '/list' ? classes.activeLink : ''}`} to='/list'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/list' ? classes.active : ''}`}>Restaurants</Button></Link>
+                    <Link className={`${classes.link} ${pathName === '/map' ? classes.activeLink : ''}`} to='/map'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/map' ? classes.active : ''}`}>Map</Button></Link>
                 </div>
                  {this.renderByUrl()}
             </div>

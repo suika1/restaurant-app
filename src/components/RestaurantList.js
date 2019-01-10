@@ -9,13 +9,24 @@ const styles = {
     list: {
         width: '90%',
         maxWidth: '1000px',
+        marginTop: '10px',
         margin: '30px auto',
         display: 'grid',
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: '1fr',
     },
+    upwardsArrow: {
+        position: 'fixed',
+        right: '20px',
+        bottom: '40px',
+        backgroundColor: '#9c28b1',
+        '&:hover': {
+            backgroundColor: '#7920a2',
+        },
+    },
     header: {
       textAlign: 'center',
+        marginTop: '15px',
       fontWeight: '300',
     },
     loadingMessage: {
@@ -53,6 +64,27 @@ const styles = {
 };
 
 class RestaurantList extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            displayScrollBtn: 'none'
+        };
+    };
+
+    componentDidMount = () => {
+        document.getElementById('root').onscroll = () => {
+            if (document.getElementById('root').scrollTop > 1){
+                this.setState({displayScrollBtn: 'block'});
+            }else{
+                this.setState({displayScrollBtn: 'none'});
+            }
+        }
+    };
+
+    componentWillUnmount = () => {
+        document.getElementById('root').onscroll = null;
+    };
+
     renderList = () => {
         let {classes, restaurants, needsGeolocation} = this.props;
         if (!restaurants.items) {
@@ -80,6 +112,13 @@ class RestaurantList extends React.Component {
         let {classes} = this.props;
         return (
             <div className={classes.listComponent}>
+                <Fab
+                    style={{display: this.state.displayScrollBtn}}
+                    className={classes.upwardsArrow}
+                    onClick={() => document.getElementById('root').scrollTo(0, 0)}
+                >
+                    ↑
+                </Fab>
                 <Typography className={classes.header} variant='h2'>Restaurant list</Typography>
                 <div className={classes.list}>
                     {this.renderList()}

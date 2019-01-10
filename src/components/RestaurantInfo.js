@@ -12,6 +12,10 @@ const styles = {
             textAlign: 'center',
         },
     },
+    scrollWrapper: {
+        overflowY: 'scroll',
+        overflowX: 'hidden',
+    },
     dialogContent: {
       overflowY: 'initial',
         width: 'max-content',
@@ -36,7 +40,7 @@ const styles = {
         marginLeft: 'auto',
     },
     starsContent: {
-        alignSelf: 'center',
+        margin: '0 auto',
     },
     starsOuter: {
         display: 'inline-block',
@@ -204,25 +208,27 @@ class RestaurantInfo extends React.Component{
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle className={classes.title}>{title}</DialogTitle>
-                <DialogContent className={`${classes.dialogContent} ${classes.openClosed}`}>
-                    <Typography variant='h5'>{openClosed}</Typography>
-                </DialogContent>
-                <DialogContent className={`${classes.dialogContent} ${classes.vicinity}`}>
-                    <Typography variant='h5'>{vicinity}</Typography>
-                </DialogContent>
-                <DialogContent className={`${classes.dialogContent} ${classes.starsContent}`}>
-                    <div className={classes.starsOuter}>
-                        <div style={{width: `${rating ? rating.toFixed(1) / 5*100 : 0}%`}} className={classes.starsInner}/>
-                    </div>
-                </DialogContent>
-                {this.renderPhoneNum()}
-                {this.renderReviews()}
-                <DialogActions>
-                    <Button className={classes.leaveBtn} onClick={handleClose} color="primary">
-                        Leave
-                    </Button>
-                </DialogActions>
+                <div className={classes.scrollWrapper}>
+                    <DialogTitle className={classes.title}>{title}</DialogTitle>
+                    <DialogContent className={`${classes.dialogContent} ${classes.openClosed}`}>
+                        <Typography variant='h5'>{openClosed}</Typography>
+                    </DialogContent>
+                    <DialogContent className={`${classes.dialogContent} ${classes.vicinity}`}>
+                        <Typography variant='h5'>{vicinity}</Typography>
+                    </DialogContent>
+                    <DialogContent className={`${classes.dialogContent} ${classes.starsContent}`}>
+                        <div className={classes.starsOuter}>
+                            <div style={{width: `${rating ? rating.toFixed(1) / 5*100 : 0}%`}} className={classes.starsInner}/>
+                        </div>
+                    </DialogContent>
+                    {this.renderPhoneNum()}
+                    {this.renderReviews()}
+                    <DialogActions>
+                        <Button className={classes.leaveBtn} onClick={handleClose} color="primary">
+                            Leave
+                        </Button>
+                    </DialogActions>
+                </div>
             </Dialog>
         );
     }

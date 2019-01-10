@@ -9,7 +9,7 @@ import { createMap, createMarkers} from "../actions/mapRestaurantsActions";
 const styles = {
     mapWrapper: {
         width: '100%',
-        height: 'calc(100% - 47px)',
+        height: 'calc(100% - 40px)',
     },
     map: {
         width: '100%',

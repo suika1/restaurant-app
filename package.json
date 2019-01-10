@@ -11,8 +11,8 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.2",
     "redux": "latest",
-    "redux-thunk": "^2.3.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -30,6 +30,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-  "prop-types": "latest"
+    "prop-types": "latest"
   }
 }
