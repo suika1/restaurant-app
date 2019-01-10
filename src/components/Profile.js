@@ -1,7 +1,8 @@
 import React from 'react';
-import {Typography} from '@material-ui/core';
+import {Button, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import {handleAuthClick} from "../actions/userActions";
 
 const styles = {
     profile: {
@@ -19,30 +20,46 @@ const styles = {
         borderRadius: '100px',
         marginRight: '25px',
     },
-    username: {
-        color: '#7b12cc',
+    anonymous: {
+        fontSize: '4rem',
     },
     'user-info': {
-        backgroundColor: '#afbabb',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'space-around',
         width: 'calc(100% - 100px)',
     },
-    'my-restaurants': {
-        width: '80%',
-        backgroundColor: '#a3aebb',
-        margin: '10px auto',
+    '@media (max-width: 600px)': {
+        about: {
+            flexDirection: 'column',
+            alignItems: 'center',
+
+        },
+        'user-info': {
+            width: '100%',
+            '& > *': {
+                fontSize: '2rem',
+            }
+        },
+        email: {
+            wordBreak: 'break-all',
+        }
     }
 };
 
 class Profile extends React.PureComponent{
     renderAnonymous = () => {
         let { classes } = this.props;
+        let {initialized, fullName} = this.props.auth;
         return (
             <div className={classes.profile}>
+                <Button onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
                 <div className={classes.about}>
                     <div className={classes.avatar} style={{}}>
                     </div>
                     <div className={classes['user-info']}>
-                        <Typography className={classes.username}>Anonymous</Typography>
+                        <Typography className={classes.anonymous}>Anonymous</Typography>
                     </div>
                 </div>
             </div>
@@ -50,19 +67,20 @@ class Profile extends React.PureComponent{
     };
 
     render(){
-        let { classes } = this.props;
-        let { imageUrl, fullName, email } = this.props.auth;
+        let { classes} = this.props;
+        let { imageUrl, fullName, email, initialized } = this.props.auth;
         if (fullName === ''){
             return this.renderAnonymous();
         }
         return (
             <div className={classes.profile}>
+                <Button onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
                 <div className={classes.about}>
                     <div className={classes.avatar} style={{backgroundImage: `url("${imageUrl}")`}} >
                     </div>
                     <div className={classes['user-info']}>
-                        <Typography className={classes.username}>{fullName}</Typography>
-                        <Typography className={classes.username}>{email}</Typography>
+                        <Typography className={classes.username} variant='h3'>{fullName}</Typography>
+                        <Typography className={classes.email} variant='h4'>Your email: {email}</Typography>
                     </div>
                 </div>
             </div>

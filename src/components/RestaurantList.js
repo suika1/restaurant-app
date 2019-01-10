@@ -14,6 +14,10 @@ const styles = {
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: '1fr',
     },
+    header: {
+      textAlign: 'center',
+      fontWeight: '300',
+    },
     loadingMessage: {
         margin: '20px auto',
         width: 'max-content',
@@ -30,6 +34,16 @@ const styles = {
         marginTop: '15px',
         textDecoration: 'none',
         width: 'max-content',
+    },
+    '@media (max-width: 650px)': {
+        header: {
+            fontSize: '3rem',
+        },
+        list:{
+            gridTemplateColumns: '1fr',
+            gridTemplateRows: '1fr',
+            maxWidth: '500px',
+        }
     }
 };
 
@@ -61,7 +75,7 @@ class RestaurantList extends React.Component {
         let {classes} = this.props;
         return (
             <div className={classes.listComponent}>
-                <Typography variant='h2'>Full restaurant list</Typography>
+                <Typography className={classes.header} variant='h2'>Restaurant list</Typography>
                 <div className={classes.list}>
                     {this.renderList()}
                 </div>

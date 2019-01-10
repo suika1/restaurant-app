@@ -11,9 +11,14 @@ import {scriptUploadError, triggerMapLoaded} from "../actions/mapRestaurantsActi
 import { withRouter }  from 'react-router';
 
 const styles = {
+    app: {
+        height: '100%',
+    },
     topMenu: {
         margin: '10px auto',
+        marginTop: '0',
         width: 'max-content',
+        display: 'flex',
     },
     link: {
         textDecoration: 'none',
@@ -33,6 +38,15 @@ const styles = {
         margin: '10px auto',
         width: 'max-content',
     },
+    '@media (max-width: 350px)': {
+        topMenu: {
+            flexDirection: 'column',
+            textAlign: 'center',
+            '& > * > *':{
+                width: '100%',
+            },
+        },
+    }
 };
 
 class App extends React.Component{
@@ -70,42 +84,40 @@ class App extends React.Component{
     renderByUrl = () => {
         let { classes } = this.props;
         return (
-            <div className={classes.main}>
-                <Switch>
-                    <Route exact
-                           path='/'
-                           render={() => (
-                               <ProfileContainer/>
-                           )}
-                    />
-                    <Route exact
-                           path='/list'
-                           render={() => (
-                               <RestaurantListContainer/>
-                           )}
-                    />
-                    <Route exact
-                           path='/map'
-                           render={() => (
-                               <MapContainer/>
-                           )}
-                    />
+            <Switch>
+                <Route exact
+                       path='/'
+                       render={() => (
+                           <ProfileContainer/>
+                       )}
+                />
+                <Route exact
+                       path='/list'
+                       render={() => (
+                           <RestaurantListContainer/>
+                       )}
+                />
+                <Route exact
+                       path='/map'
+                       render={() => (
+                           <MapContainer/>
+                       )}
+                />
 
-                    {/*If wrong url*/}
-                    <Route render={() => (
-                        <div>
-                            <Typography className={this.props.classes.relocateText} variant='h4'>Sorry, it's wrong URL</Typography>
-                            <Typography className={this.props.classes.relocateText} variant='h4'>You can navigate to <Link to='/'><Button>Home</Button></Link> page </Typography>
-                        </div>
-                    )}/>
-                </Switch>
-            </div>
+                {/*If wrong url*/}
+                <Route render={() => (
+                    <div>
+                        <Typography className={this.props.classes.relocateText} variant='h4'>Sorry, it's wrong URL</Typography>
+                        <Typography className={this.props.classes.relocateText} variant='h4'>You can navigate to <Link to='/'><Button>Home</Button></Link> page </Typography>
+                    </div>
+                )}/>
+            </Switch>
         )
     };
 
     render(){
         //TODO: if user isn't authorized - ask him to login
-        let {classes, auth} = this.props;
+        let {classes} = this.props;
         return(
             <div className={classes.app}>
                 <div className={classes.topMenu}>
@@ -113,8 +125,7 @@ class App extends React.Component{
                     <Link className={classes.link} to='/list'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/list' ? classes.active : ''}`}>Restaurants</Button></Link>
                     <Link className={classes.link} to='/map'><Button variant='outlined' className={ `${classes.buttonLink} ${this.props.location.pathname === '/map' ? classes.active : ''}`}>Map</Button></Link>
                 </div>
-                <Button onClick={auth.initialized ? () => handleAuthClick() : () => false}>{auth.name === '' ? 'Authenticate' : 'Leave'}</Button>
-                {this.renderByUrl()}
+                 {this.renderByUrl()}
             </div>
         );
     }
@@ -122,7 +133,6 @@ class App extends React.Component{
 
 const mapStateToProps = store => {
     return {
-        auth: store.auth,
         map: store.map,
     }
 };

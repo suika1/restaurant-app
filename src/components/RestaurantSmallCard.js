@@ -16,6 +16,12 @@ const styles = {
             marginBottom: '40px',
         }
     },
+    title: {
+      '& > * > *':{
+          fontWeight: '400',
+        fontSize: '2rem',
+      },
+    },
     starsOuter: {
         display: 'inline-block',
         position: 'relative',
@@ -37,6 +43,9 @@ const styles = {
             content: '"\\f005 \\f005 \\f005 \\f005 \\f005"',
             color: '#f8ce0b',
         },
+    },
+    moreBtn: {
+        padding: 0
     },
 };
 
@@ -82,7 +91,7 @@ class RestaurantSmallCard extends React.Component{
                     placeId={restaurant.place_id}
                 />
                 <Card className={classes.restaurant}>
-                    <CardHeader title={restaurant.name}/>
+                    <CardHeader className={classes.title} title={restaurant.name}/>
                     <CardContent >
                         <Typography variant='h5'>{restaurant.vicinity}</Typography>
                     </CardContent>
@@ -93,7 +102,7 @@ class RestaurantSmallCard extends React.Component{
                         </div>
                     </CardContent>
                     <CardContent>
-                        <Button variant='text' onClick={() => this.handleDialogOpen()}><Typography className={classes.knowMore} variant='caption'>More...</Typography></Button>
+                        <Button className={classes.moreBtn} variant='text' onClick={() => this.handleDialogOpen()}><Typography variant='caption'>More...</Typography></Button>
                     </CardContent>
                 </Card>
             </React.Fragment>

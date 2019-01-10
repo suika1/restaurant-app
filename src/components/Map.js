@@ -7,7 +7,19 @@ import RestaurantInfo from './RestaurantInfo';
 import { createMap, createMarkers} from "../actions/mapRestaurantsActions";
 
 const styles = {
-
+    mapWrapper: {
+        width: '100%',
+        height: 'calc(100% - 47px)',
+    },
+    map: {
+        width: '100%',
+        height: '100%',
+    },
+    '@media (max-width: 350px)': {
+        mapWrapper: {
+            height: 'calc(100% - 121px)',
+        }
+    }
 };
 
 //current Google Map object
@@ -80,6 +92,7 @@ class Map extends React.Component{
         if (!this.state[OPEN_LOCATION] || !this.props.map.needsGeolocation) {
             return;
         }
+        let {classes} = this.props;
         return(
             <div>
                 <Dialog
@@ -140,10 +153,10 @@ class Map extends React.Component{
     render = () => {
         let { classes } = this.props;
         return (
-            <div>
+            <div className={classes.mapWrapper}>
                 {this.renderRestaurantInfo()}
                 {this.renderLocationDialog()}
-                <div style={{width: '100%', height: '1000px'}} id={MAP_ID}/>
+                <div className={classes.map} id={MAP_ID}/>
             </div>
         );
     }
