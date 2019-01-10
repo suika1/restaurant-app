@@ -24,16 +24,18 @@ const styles = {
     },
     relocateContainer: {
         margin: '20px auto',
-        width: 'max-content',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
+        width: '200%',
     },
     relocateMessage: {
         marginTop: '15px',
         textDecoration: 'none',
-        width: 'max-content',
+    },
+    relocateBtn: {
+        backgroundColor: '#ff398b',
     },
     '@media (max-width: 650px)': {
         header: {
@@ -43,6 +45,9 @@ const styles = {
             gridTemplateColumns: '1fr',
             gridTemplateRows: '1fr',
             maxWidth: '500px',
+        },
+        relocateContainer: {
+            width: '100%',
         }
     }
 };
@@ -57,7 +62,7 @@ class RestaurantList extends React.Component {
             return (
                 <div className={classes.relocateContainer}>
                     <Typography variant='h4'>You need to select place in which you are located.</Typography>
-                    <NavLink className={classes.relocateMessage} to='map'><Fab color="primary">Go</Fab></NavLink>
+                    <NavLink className={classes.relocateMessage} to='map'><Fab className={classes.relocateBtn}>Go</Fab></NavLink>
             </div>
             )
         }
