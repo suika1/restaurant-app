@@ -1,7 +1,1 @@
-# 1
-
-## 2
-
-### `3`
-
-### just 3
+# Test is avaliable at https://cryptic-reaches-94266.herokuapp.com/map
