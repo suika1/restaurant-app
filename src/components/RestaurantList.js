@@ -8,7 +8,7 @@ import RestaurantSmallCard from "./RestaurantSmallCard";
 const styles = {
     list: {
         width: '90%',
-        maxWidth: '1000px',
+        maxWidth: '800px',
         marginTop: '10px',
         margin: '30px auto',
         display: 'grid',
@@ -20,6 +20,13 @@ const styles = {
         right: '20px',
         bottom: '40px',
         backgroundColor: '#9c28b1',
+        fontSize: '28px',
+        zIndex: '2',
+        '& > *:first-child':{
+          position: 'relative',
+            color: 'white',
+          top: '-3px',
+        },
         '&:hover': {
             backgroundColor: '#7920a2',
         },
@@ -55,10 +62,21 @@ const styles = {
         list:{
             gridTemplateColumns: '1fr',
             gridTemplateRows: '1fr',
-            maxWidth: '500px',
+            maxWidth: '430px',
         },
         relocateContainer: {
             width: '100%',
+        }
+    },
+    '@media (max-width: 450px)':{
+        header: {
+            position: 'relative',
+            marginTop: '0',
+            top: '50px',
+        },
+        list: {
+            position: 'relative',
+            top: '30px',
         }
     }
 };

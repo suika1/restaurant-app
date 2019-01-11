@@ -13,13 +13,18 @@ const styles = {
         justifyContent: 'space-around',
         alignItems: 'center',
         boxShadow: '0 0 5px 0.2px #bdbdbd',
-        '&:first-child': {
-          width: 'calc(100% - 16px)',
-          textAlign: 'center',
+        textAlign: 'center',
+        cursor: 'pointer',
+        padding: '5px',
+        '& > *':{
+            width: '100%',
         },
         '&:last-child': {
             marginBottom: '40px',
-        }
+        },
+        '&:hover': {
+          boxShadow: '0px 0px 6px 0px #1b18189e',
+        },
     },
     title: {
       '& > * > *':{
@@ -95,19 +100,16 @@ class RestaurantSmallCard extends React.Component{
                     vicinity={restaurant.vicinity}
                     placeId={restaurant.place_id}
                 />
-                <Card className={classes.restaurant}>
+                <Card onClick={() => this.handleDialogOpen()} className={classes.restaurant}>
                     <CardHeader className={classes.title} title={restaurant.name}/>
                     <CardContent >
                         <Typography variant='h5'>{restaurant.vicinity}</Typography>
                     </CardContent>
-                    <CardContent>
+                    <CardContent className={classes.starsContent}>
                         <div className={classes.starsOuter}>
                             <div style={{width: `${restaurant.rating ? restaurant.rating.toFixed(1) / 5*100 : 0}%`}} className={classes.starsInner}/>
                             {this.renderWorkingStatus(restaurant)}
                         </div>
-                    </CardContent>
-                    <CardContent>
-                        <Button className={classes.moreBtn} variant='text' onClick={() => this.handleDialogOpen()}><Typography variant='caption'>More...</Typography></Button>
                     </CardContent>
                 </Card>
             </React.Fragment>

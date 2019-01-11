@@ -67,7 +67,7 @@ const styles = {
     review: {
       display: 'flex',
         '& + &': {
-          marginTop: '10px',
+          marginTop: '20px',
         },
     },
     reviews: {
@@ -107,6 +107,11 @@ const styles = {
     leaveBtn: {
         width: 'max-content',
         margin: '0 auto',
+        color: 'white',
+        backgroundColor: '#9c28b1',
+        '&:hover': {
+            backgroundColor: '#e1bee8',
+        }
     },
     '@media (max-width: 550px)': {
         dialog: {
@@ -224,7 +229,7 @@ class RestaurantInfo extends React.Component{
                     {this.renderPhoneNum()}
                     {this.renderReviews()}
                     <DialogActions>
-                        <Button className={classes.leaveBtn} onClick={handleClose} color="primary">
+                        <Button className={classes.leaveBtn} onClick={handleClose}>
                             Leave
                         </Button>
                     </DialogActions>

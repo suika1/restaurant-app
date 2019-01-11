@@ -15,9 +15,10 @@ const styles = {
         width: '100%',
         height: '100%',
     },
-    '@media (max-width: 350px)': {
+    '@media (max-width: 450px)':{
         mapWrapper: {
-            height: 'calc(100% - 121px)',
+            position: 'relative',
+            top: '40px',
         }
     }
 };

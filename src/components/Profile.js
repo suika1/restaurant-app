@@ -33,7 +33,7 @@ const styles = {
         about: {
             flexDirection: 'column',
             alignItems: 'center',
-
+            textAlign: 'center',
         },
         'user-info': {
             width: '100%',
@@ -43,6 +43,12 @@ const styles = {
         },
         email: {
             wordBreak: 'break-all',
+        }
+    },
+    '@media (max-width: 450px)':{
+        profile: {
+            position: 'relative',
+            top: '50px',
         }
     }
 };
