@@ -57,6 +57,11 @@ const styles = {
     moreBtn: {
         padding: 0
     },
+    '@media (max-width: 450px)':{
+        restaurant:{
+            margin: '30px auto',
+        }
+    }
 };
 
 class RestaurantSmallCard extends React.Component{
