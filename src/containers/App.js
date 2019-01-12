@@ -13,6 +13,7 @@ import { withRouter }  from 'react-router';
 const styles = {
     app: {
         height: '100%',
+        overflowY: 'hidden',
     },
     shadowMaker: {
         display: 'none',
@@ -78,6 +79,11 @@ const styles = {
         width: 'max-content',
     },
     '@media (max-width: 450px)': {
+        app: {
+            top: '40px',
+            height: 'calc(100% - 40px)',
+            position: 'relative',
+        },
         menuBtn: {
           display: 'block',
           position: 'absolute',
@@ -89,7 +95,7 @@ const styles = {
         },
         shadowMaker: {
             position: 'absolute',
-            height: '100vh',
+            height: 'calc(100vh - 40px)',
             width: '100vw',
             zIndex: '2',
             opacity: '0',
@@ -144,7 +150,15 @@ const styles = {
             },
             '&:active':{
                 color: 'black',
-            }
+            },
+            '&:first-child': {
+                borderTopLeftRadius: '0',
+                borderBottomLeftRadius: '0',
+            },
+            '&:last-child':{
+                borderTopRightRadius: '0',
+                borderBottomRightRadius: '0',
+            },
         },
         activeLink: {
           backgroundColor: '#ac00f966',

@@ -18,7 +18,7 @@ const styles = {
     '@media (max-width: 450px)':{
         mapWrapper: {
             position: 'relative',
-            top: '40px',
+            height: '100%',
         }
     }
 };

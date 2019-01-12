@@ -108,10 +108,12 @@ const styles = {
         width: 'max-content',
         margin: '0 auto',
         color: 'white',
+        transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
         backgroundColor: '#9c28b1',
         '&:hover': {
+            color: '#141414',
             backgroundColor: '#e1bee8',
-        }
+        },
     },
     '@media (max-width: 550px)': {
         dialog: {

@@ -19,9 +19,6 @@ const styles = {
         '& > *':{
             width: '100%',
         },
-        '&:last-child': {
-            marginBottom: '40px',
-        },
         '&:hover': {
           boxShadow: '0px 0px 6px 0px #1b18189e',
         },
@@ -53,9 +50,6 @@ const styles = {
             content: '"\\f005 \\f005 \\f005 \\f005 \\f005"',
             color: '#f8ce0b',
         },
-    },
-    moreBtn: {
-        padding: 0
     },
     '@media (max-width: 450px)':{
         restaurant:{
@@ -113,8 +107,8 @@ class RestaurantSmallCard extends React.Component{
                     <CardContent className={classes.starsContent}>
                         <div className={classes.starsOuter}>
                             <div style={{width: `${restaurant.rating ? restaurant.rating.toFixed(1) / 5*100 : 0}%`}} className={classes.starsInner}/>
-                            {this.renderWorkingStatus(restaurant)}
                         </div>
+                        {this.renderWorkingStatus(restaurant)}
                     </CardContent>
                 </Card>
             </React.Fragment>

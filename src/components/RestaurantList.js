@@ -6,6 +6,11 @@ import { NavLink } from 'react-router-dom';
 import RestaurantSmallCard from "./RestaurantSmallCard";
 
 const styles = {
+    listComponent: {
+        height: 'calc(100% - 40px)',
+        scrollBehavior: 'smooth',
+        overflowY: 'auto',
+    },
     list: {
         width: '90%',
         maxWidth: '800px',
@@ -19,7 +24,6 @@ const styles = {
         position: 'fixed',
         right: '20px',
         bottom: '40px',
-        backgroundColor: '#9c28b1',
         fontSize: '28px',
         zIndex: '2',
         '& > *:first-child':{
@@ -27,8 +31,13 @@ const styles = {
             color: 'white',
           top: '-3px',
         },
+        transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        backgroundColor: '#9c28b1',
         '&:hover': {
-            backgroundColor: '#7920a2',
+            backgroundColor: '#e1bee8',
+            '& > *:first-child':{
+                color: '#141414',
+            },
         },
     },
     header: {
@@ -69,10 +78,13 @@ const styles = {
         }
     },
     '@media (max-width: 450px)':{
+        listComponent: {
+            height: '100%',
+        },
         header: {
             position: 'relative',
             marginTop: '0',
-            top: '50px',
+            top: '25px',
         },
         list: {
             position: 'relative',

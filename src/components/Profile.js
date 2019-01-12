@@ -9,6 +9,9 @@ const styles = {
         width: '100%',
         maxWidth: '1000px',
         margin: '20px auto',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
     about: {
       display: 'flex',
@@ -29,6 +32,20 @@ const styles = {
         justifyContent: 'space-around',
         width: 'calc(100% - 100px)',
     },
+    leaveBtn: {
+        top: '27px',
+        padding: '10px',
+        color: 'white',
+        transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        backgroundColor: '#9c28b1',
+        '&:hover': {
+            color: '#141414',
+            backgroundColor: '#e1bee8',
+        },
+    },
+    authBtn: {
+        extends: 'leaveBtn',
+    },
     '@media (max-width: 600px)': {
         about: {
             flexDirection: 'column',
@@ -48,7 +65,7 @@ const styles = {
     '@media (max-width: 450px)':{
         profile: {
             position: 'relative',
-            top: '50px',
+            top: '25px',
         }
     }
 };
@@ -59,14 +76,12 @@ class Profile extends React.PureComponent{
         let {initialized, fullName} = this.props.auth;
         return (
             <div className={classes.profile}>
-                <Button onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
                 <div className={classes.about}>
-                    <div className={classes.avatar} style={{}}>
-                    </div>
                     <div className={classes['user-info']}>
                         <Typography className={classes.anonymous}>Anonymous</Typography>
                     </div>
                 </div>
+                <Button className={classes.leaveBtn} onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
             </div>
         )
     };
@@ -79,7 +94,6 @@ class Profile extends React.PureComponent{
         }
         return (
             <div className={classes.profile}>
-                <Button onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
                 <div className={classes.about}>
                     <div className={classes.avatar} style={{backgroundImage: `url("${imageUrl}")`}} >
                     </div>
@@ -88,6 +102,7 @@ class Profile extends React.PureComponent{
                         <Typography className={classes.email} variant='h4'>Your email: {email}</Typography>
                     </div>
                 </div>
+                <Button className={classes.leaveBtn} onClick={initialized ? () => handleAuthClick() : () => false}>{'Leave'}</Button>
             </div>
         );
     }
