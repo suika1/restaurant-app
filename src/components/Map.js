@@ -93,7 +93,6 @@ class Map extends React.Component{
         if (!this.state[OPEN_LOCATION] || !this.props.map.needsGeolocation) {
             return;
         }
-        let {classes} = this.props;
         return(
             <div>
                 <Dialog

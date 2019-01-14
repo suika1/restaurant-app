@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import {handleAuthClick} from "../actions/userActions";
 
-const styles = {
+const styles = theme => ({
     profile: {
         width: '100%',
         maxWidth: '1000px',
@@ -37,10 +37,10 @@ const styles = {
         padding: '10px',
         color: 'white',
         transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-        backgroundColor: '#9c28b1',
+        backgroundColor: theme.palette.primary.main,
         '&:hover': {
             color: '#141414',
-            backgroundColor: '#e1bee8',
+            backgroundColor: theme.palette.primary.light,
         },
     },
     authBtn: {
@@ -68,7 +68,7 @@ const styles = {
             top: '25px',
         }
     }
-};
+});
 
 class Profile extends React.PureComponent{
     renderAnonymous = () => {

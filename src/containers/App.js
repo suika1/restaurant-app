@@ -6,11 +6,11 @@ import { Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MapContainer from './MapContainer';
 import {Switch, Route, Link} from 'react-router-dom';
-import {triggerGoogleLoaded, handleAuthClick} from "../actions/userActions";
+import {triggerGoogleLoaded} from "../actions/userActions";
 import {scriptUploadError, triggerMapLoaded} from "../actions/mapRestaurantsActions";
 import { withRouter }  from 'react-router';
 
-const styles = {
+const styles = theme => ({
     app: {
         height: '100%',
         overflowY: 'hidden',
@@ -26,10 +26,9 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#9c28b1',
+        backgroundColor: theme.palette.primary.main,
     },
     menuBtn: {
-        //display: 'none',
         width: '40px',
         height: '40px',
         backgroundSize: '100%',
@@ -47,7 +46,7 @@ const styles = {
         verticalAlign: 'middle',
         '&:focus': {
             color: '#141414',
-            backgroundColor: '#e1bee8',
+            backgroundColor: theme.palette.primary.light,
             outline: 'none',
         },
         '&:active': {
@@ -55,7 +54,7 @@ const styles = {
         },
         '&:hover': {
             color: '#141414',
-            backgroundColor: '#e1bee8',
+            backgroundColor: theme.palette.primary.light,
         },
         '&:first-child':{
             borderBottomLeftRadius: '7px',
@@ -67,10 +66,10 @@ const styles = {
         }
     },
     activeLink: {
-        backgroundColor: '#7920a2',
+        backgroundColor: theme.palette.secondary.main,
         '&:focus':{
             color: '#f5f6fa',
-            backgroundColor: '#7920a2',
+            backgroundColor: theme.palette.secondary.main,
             boxShadow: 'inset 0 0 13px 0px #2c12386e',
         },
     },
@@ -169,7 +168,7 @@ const styles = {
             opacity: '1',
         }
     }
-};
+});
 
 class App extends React.Component{
     constructor(props){
@@ -211,7 +210,6 @@ class App extends React.Component{
 
     //render components of app by their url
     renderByUrl = () => {
-        let { classes } = this.props;
         return (
             <Switch>
                 <Route exact

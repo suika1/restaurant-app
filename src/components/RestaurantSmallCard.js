@@ -1,4 +1,4 @@
-import {Button, Card, CardContent, CardHeader, Typography} from "@material-ui/core";
+import { Card, CardContent, CardHeader, Typography} from "@material-ui/core";
 import React from "react";
 import RestaurantInfo from './RestaurantInfo';
 import { withStyles } from '@material-ui/core/styles';

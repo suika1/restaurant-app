@@ -5,7 +5,7 @@ import {getAdditionalInfo} from "../actions/mapRestaurantsActions";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = {
+const styles = theme => ({
     dialog: {
         '& > * > div': {
             overflowX: 'hidden',
@@ -109,10 +109,10 @@ const styles = {
         margin: '0 auto',
         color: 'white',
         transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-        backgroundColor: '#9c28b1',
+        backgroundColor: theme.palette.primary.main,
         '&:hover': {
             color: '#141414',
-            backgroundColor: '#e1bee8',
+            backgroundColor: theme.palette.primary.light,
         },
     },
     '@media (max-width: 550px)': {
@@ -138,7 +138,7 @@ const styles = {
             width: '100%',
         }
     }
-};
+});
 
 //Dialog window with more info about certain restaurant
 class RestaurantInfo extends React.Component{

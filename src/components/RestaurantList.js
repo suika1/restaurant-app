@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { NavLink } from 'react-router-dom';
 import RestaurantSmallCard from "./RestaurantSmallCard";
 
-const styles = {
+const styles = theme => ({
     listComponent: {
         height: 'calc(100% - 40px)',
         scrollBehavior: 'smooth',
@@ -32,9 +32,9 @@ const styles = {
           top: '-3px',
         },
         transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
-        backgroundColor: '#9c28b1',
+        backgroundColor: theme.palette.primary.main,
         '&:hover': {
-            backgroundColor: '#e1bee8',
+            backgroundColor: theme.palette.primary.light,
             '& > *:first-child':{
                 color: '#141414',
             },
@@ -62,7 +62,18 @@ const styles = {
         textDecoration: 'none',
     },
     relocateBtn: {
-        backgroundColor: '#ff398b',
+        transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        backgroundColor: theme.palette.primary.main,
+        '& > *:first-child':{
+            position: 'relative',
+            color: 'white',
+        },
+        '&:hover': {
+            backgroundColor: theme.palette.primary.light,
+            '& > *:first-child':{
+                color: '#141414',
+            },
+        },
     },
     '@media (max-width: 650px)': {
         header: {
@@ -91,7 +102,7 @@ const styles = {
             top: '30px',
         }
     }
-};
+});
 
 class RestaurantList extends React.Component {
     constructor(props){
@@ -102,17 +113,18 @@ class RestaurantList extends React.Component {
     };
 
     componentDidMount = () => {
-        document.getElementById('root').onscroll = () => {
-            if (document.getElementById('root').scrollTop > 1){
+        let listComponent = this.props.classes.listComponent;
+        document.getElementsByClassName(listComponent)[0].onscroll = () => {
+            if (document.getElementsByClassName(listComponent)[0].scrollTop > 1) {
                 this.setState({displayScrollBtn: 'block'});
-            }else{
+            } else {
                 this.setState({displayScrollBtn: 'none'});
             }
         }
     };
 
     componentWillUnmount = () => {
-        document.getElementById('root').onscroll = null;
+        document.getElementsByClassName(this.props.classes.listComponent)[0].onscroll = null;
     };
 
     renderList = () => {
@@ -145,7 +157,7 @@ class RestaurantList extends React.Component {
                 <Fab
                     style={{display: this.state.displayScrollBtn}}
                     className={classes.upwardsArrow}
-                    onClick={() => document.getElementById('root').scrollTo(0, 0)}
+                    onClick={() => document.getElementsByClassName(classes.listComponent)[0].scrollTo(0, 0)}
                 >
                     ↑
                 </Fab>
