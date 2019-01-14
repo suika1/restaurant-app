@@ -15,7 +15,7 @@ export default function restaurants(state = defaultState, action) {
         case GET_RESTAURANTS_REQUEST:
             return {...state, isFetching: true, error: ''};
         case GET_RESTAURANTS_SUCCESS:
-            return {...state, isFetching: false, error: '', items: [...state.items, ...action.restaurants]};//TODO:
+            return {...state, isFetching: false, error: '', items: [...state.items, ...action.restaurants]};
         case GET_RESTAURANTS_ERROR:
             return state;
         default:

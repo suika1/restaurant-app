@@ -73,7 +73,6 @@ const styles = theme => ({
 class Profile extends React.PureComponent{
     renderAnonymous = () => {
         let { classes } = this.props;
-        let {initialized, fullName} = this.props.auth;
         return (
             <div className={classes.profile}>
                 <div className={classes.about}>
@@ -81,7 +80,6 @@ class Profile extends React.PureComponent{
                         <Typography className={classes.anonymous}>Anonymous</Typography>
                     </div>
                 </div>
-                <Button className={classes.leaveBtn} onClick={initialized ? () => handleAuthClick() : () => false}>{fullName === '' ? 'Authenticate' : 'Leave'}</Button>
             </div>
         )
     };

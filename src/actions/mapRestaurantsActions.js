@@ -37,14 +37,6 @@ const getRestaurantsError = error => {
     }
 };
 
-export const getRestaurants = () => {
-    return dispatch => {
-        dispatch(getRestaurantsRequest());
-        //fetch some data
-        dispatch(getRestaurantsSuccess())
-    }
-};
-
 export const mapInitialized = () => {
     return {
         type: MAP_INITIALIZED,
@@ -329,7 +321,7 @@ export const createMarkers = (places, map, callback) => {
             size: new google.maps.Size(71, 71),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(17, 34),
-            scaledSize: new google.maps.Size(35, 35)
+            scaledSize: new google.maps.Size(45, 45)
         };
 
         let marker = new google.maps.Marker({

@@ -6,9 +6,11 @@ import { Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MapContainer from './MapContainer';
 import {Switch, Route, Link} from 'react-router-dom';
-import {triggerGoogleLoaded} from "../actions/userActions";
+import {authSignedOut, triggerGoogleLoaded} from "../actions/userActions";
 import {scriptUploadError, triggerMapLoaded} from "../actions/mapRestaurantsActions";
 import { withRouter }  from 'react-router';
+import { loadAuthDataFromStorage, authSignedIn } from "../actions/userActions";
+import AuthForm from "../components/AuthForm";
 
 const styles = theme => ({
     app: {
@@ -40,7 +42,7 @@ const styles = theme => ({
         textDecoration: 'none',
         border: '1px solid #721d82',
         padding: '8px 20px',
-        color: ' #f5f6fa',
+        color: '#f5f6fa',
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif;',
         transition: 'background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
         verticalAlign: 'middle',
@@ -179,33 +181,42 @@ class App extends React.Component{
     }
 
     componentDidMount = () => {
+        this.checkAuthFromStorage();
         this.attachAuthScript();
         this.attachMapScripts();
     };
 
     //load Google's JS lib and let user authenticate
-    attachAuthScript = (errorCounter = 0) => {
+    attachAuthScript = () => {
         let s = document.createElement('script');
         s.src = "https://apis.google.com/js/api.js";
         s.defer = true;
         s.onload = () => {
             this.props.triggerGoogleLoaded();
         };
-        s.onerror = () => errorCounter < 5 ? this.attachAuthScript(errorCounter+1) : scriptUploadError();
+        s.onerror = () => scriptUploadError();
         document.head.appendChild(s);
     };
 
     //load Google Maps API Library
-    attachMapScripts = (errorCounter = 0) => {
+    attachMapScripts = () => {
         let s = document.createElement('script');
         s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBc0yLsAhKiyU2Cys9LVy0N4yA_t7AqF5E&libraries=places";
         s.defer = true;
         s.onload = () => {
             this.props.triggerMapLoaded();
         };
-        s.onerror = () => errorCounter < 5 ? this.attachMapScripts(errorCounter+1) : scriptUploadError();
+        s.onerror = () => scriptUploadError();
         document.head.appendChild(s);
+    };
 
+    checkAuthFromStorage = () => {
+        let storageProfile = loadAuthDataFromStorage();
+        if (storageProfile){
+            this.props.authSignIn(storageProfile);
+        }else{
+            this.props.authSignOut();
+        }
     };
 
     //render components of app by their url
@@ -234,13 +245,43 @@ class App extends React.Component{
                 {/*If wrong url*/}
                 <Route render={() => (
                     <div>
-                        <Typography className={this.props.classes.relocateText} variant='h4'>Sorry, it's wrong URL</Typography>
-                        <Typography className={this.props.classes.relocateText} variant='h4'>You can navigate to <Link to='/'><Button>Home</Button></Link> page </Typography>
+                        <Typography
+                            className={this.props.classes.relocateText}
+                            variant='h4'
+                        >
+                            Sorry, it's wrong URL
+                        </Typography>
+                        <Typography
+                            className={this.props.classes.relocateText}
+                            variant='h4'
+                        >
+                            You can navigate to
+                            <Link
+                                to='/list'
+                                style={{textDecoration: 'none'}}
+                            >
+                                <Button
+                                    color="primary"
+                                    variant="outlined"
+                                >
+                                    Restaurants
+                                </Button>
+                            </Link>
+                             page
+                        </Typography>
                     </div>
                 )}/>
             </Switch>
         )
     };
+
+    //render form for authentication
+    renderAuthForm() {
+        let {auth} = this.props;
+        if(auth.initialized && !auth.fullName){
+            return (<AuthForm/>)
+        }
+    }
 
     //handler for mobile menu btn click
     onMenuBtnClick = () => {
@@ -291,7 +332,6 @@ class App extends React.Component{
     };
 
     render(){
-        //TODO: if user isn't authorized - ask him to login
         let {classes} = this.props;
         let pathName = this.props.location.pathname;
         return(
@@ -306,6 +346,7 @@ class App extends React.Component{
                 </div>
                 <div className={classes.shadowMaker}/>
                  {this.renderByUrl()}
+                {this.renderAuthForm()}
             </div>
         );
     }
@@ -313,7 +354,7 @@ class App extends React.Component{
 
 const mapStateToProps = store => {
     return {
-        map: store.map,
+        auth: store.auth,
     }
 };
 
@@ -321,6 +362,8 @@ const mapDispatchToProps = dispatch => {
     return {
         triggerGoogleLoaded: () => dispatch(triggerGoogleLoaded()),
         triggerMapLoaded: () => dispatch(triggerMapLoaded()),
+        authSignIn: (profile) => dispatch(authSignedIn(profile)),
+        authSignOut: () => dispatch(authSignedOut()),
     }
 };
 

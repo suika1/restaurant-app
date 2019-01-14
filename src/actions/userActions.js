@@ -2,6 +2,14 @@ export const AUTH_SIGNED_IN = 'AUTH_SIGNED_IN';
 export const AUTH_SIGNED_OUT = 'AUTH_SIGNED_OUT';
 export const AUTH_INITIALIZED = 'AUTH_INITIALIZED';
 
+const STORAGE_AUTH_KEY = 'auth_date';
+
+export const saveAuthDataToStorage = (data) => localStorage.setItem(STORAGE_AUTH_KEY, JSON.stringify(data));
+
+export const loadAuthDataFromStorage = () => JSON.parse(localStorage.getItem(STORAGE_AUTH_KEY));
+
+export const removeAuthDataFromStorage = () => localStorage.removeItem(STORAGE_AUTH_KEY);
+
 /* eslint-disable no-undef */
 
 /* Action creators */
@@ -12,14 +20,16 @@ export const authInitialized = () => {
     }
 };
 
-const authSignedIn = user => {
+export const authSignedIn = user => {
+    saveAuthDataToStorage(user);
     return {
         type: AUTH_SIGNED_IN,
         user: user,
     }
 };
 
-const authSignedOut = () => {
+export const authSignedOut = () => {
+    removeAuthDataFromStorage();
     return {
         type: AUTH_SIGNED_OUT,
     }
@@ -44,9 +54,6 @@ function initClient(dispatch) {
 
             // Listen for sign-in state changes.
             GoogleAuth.isSignedIn.listen(setSigninStatus(dispatch));
-
-            // Handle initial sign-in state. (Determine if user is already signed in.)
-            setSigninStatus(dispatch)();
         });
     }
 }
@@ -54,56 +61,40 @@ function initClient(dispatch) {
 //handles sign-in\sign-out clicks
 export function handleAuthClick() {
     try {
-        if (GoogleAuth.isSignedIn.get()) {
-            // User is authorized and has clicked 'Sign out' button.
-            GoogleAuth.disconnect();
-        } else {
-            // User is not signed in. Start Google auth flow.
-            GoogleAuth.signIn();
+        if(GoogleAuth) {
+            if (GoogleAuth.isSignedIn.get()) {
+                // User is authorized and has clicked 'Sign out' button.
+                GoogleAuth.disconnect();
+            } else {
+                // User is not signed in. Start Google auth flow.
+                GoogleAuth.signIn();
+            }
         }
-    } catch(e) {
+    } catch (e) {
         console.warn(`auth error:`) || console.warn(e);
     }
+
 }
 
 //Listens for changes in authorization status
-function setSigninStatus(dispatch) {
-    return () => {
-        let user = GoogleAuth.currentUser.get();
-        let isAuthorized = user.hasGrantedScopes(SCOPE);
-        if (isAuthorized) {
-            //setting profile data for dispatching
-            let basicProfile = user.getBasicProfile();
-            let profile = {
-                name: basicProfile.getGivenName(),
-                familyName: basicProfile.getFamilyName(),
-                fullName: basicProfile.getName(),
-                imageUrl: basicProfile.getImageUrl(),
-                email: basicProfile.getEmail(),
-            };
-            dispatch(authSignedIn(profile));
-        } else {
-            dispatch(authSignedOut());
-        }
+const setSigninStatus = dispatch => () => {
+    let user = GoogleAuth.currentUser.get();
+    let isAuthorized = user.hasGrantedScopes(SCOPE);
+    if (isAuthorized) {
+        //setting profile data for dispatching
+        let basicProfile = user.getBasicProfile();
+        let profile = {
+            name: basicProfile.getGivenName(),
+            familyName: basicProfile.getFamilyName(),
+            fullName: basicProfile.getName(),
+            imageUrl: basicProfile.getImageUrl(),
+            email: basicProfile.getEmail(),
+        };
+        dispatch(authSignedIn(profile));
+    } else {
+        dispatch(authSignedOut());
     }
-}
-
-//just log user data
-// eslint-disable-next-line no-unused-vars
-function onSignIn(googleUser) {
-    // Useful data for your client-side scripts:
-    let profile = googleUser.getBasicProfile();
-    console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-    console.log('Full Name: ' + profile.getName());
-    console.log('Given Name: ' + profile.getGivenName());
-    console.log('Family Name: ' + profile.getFamilyName());
-    console.log("Image URL: " + profile.getImageUrl());
-    console.log("Email: " + profile.getEmail());
-
-    // The ID token you need to pass to your backend:
-    let id_token = googleUser.getAuthResponse().id_token;
-    console.log("ID Token: " + id_token);
-}
+};
 
 //callback, when script for Google JS API is loaded
 export function triggerGoogleLoaded() {

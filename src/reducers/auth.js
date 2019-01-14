@@ -32,12 +32,13 @@ export default function auth(state = defaultState, action) {
                 fullName: fullName,
                 imageUrl: imageUrl,
                 email: email,
+                isSignedIn: true,
             }
         }
         case AUTH_SIGNED_OUT:
-            return { ...defaultState, initialized: true };
+            return { ...defaultState, initialized: state.initialized };
         case SCRIPT_UPLOAD_ERROR:
-            return { ...defaultState, initialized: true, error: SCRIPT_UPLOAD_ERROR};
+            return { ...defaultState, initialized: state.initialized, error: SCRIPT_UPLOAD_ERROR};
         default:
             return state
     }
