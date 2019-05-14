@@ -2,11 +2,11 @@ import {
     AUTH_SIGNED_IN,
     AUTH_SIGNED_OUT,
     AUTH_INITIALIZED
-} from '../actions/userActions'
+} from '../action-types/user'
 
 import {
     SCRIPT_UPLOAD_ERROR
-} from "../actions/mapRestaurantsActions";
+} from "../action-types/map-restaurants";
 
 const defaultState = {
     error: '',

@@ -4,7 +4,7 @@ import { Button, Dialog, DialogTitle, DialogActions,
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import RestaurantInfo from './RestaurantInfo';
-import { createMap, createMarkers} from "../actions/mapRestaurantsActions";
+import { createMap, createMarkers} from "../thunks/map-restaurants";
 
 const styles = {
     mapWrapper: {

@@ -5,11 +5,13 @@ import RestaurantListContainer from './RestaurantListContainer';
 import { Button, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import MapContainer from './MapContainer';
-import {Switch, Route, Link} from 'react-router-dom';
-import {authSignedOut, triggerGoogleLoaded} from "../actions/userActions";
-import {scriptUploadError, triggerMapLoaded} from "../actions/mapRestaurantsActions";
+import { Switch, Route, Link } from 'react-router-dom';
+import { authSignedOut } from "../actions/user";
+import { triggerGoogleLoaded } from '../thunks/user';
+import { scriptUploadError } from "../actions/map-restaurants";
+import { triggerMapLoaded } from '../thunks/map-restaurants';
 import { withRouter }  from 'react-router';
-import { loadAuthDataFromStorage, authSignedIn } from "../actions/userActions";
+import { loadAuthDataFromStorage, authSignedIn } from "../actions/user";
 import AuthForm from "../components/AuthForm";
 
 const styles = theme => ({

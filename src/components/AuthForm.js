@@ -1,6 +1,6 @@
 import React from 'react';
 import {Dialog, DialogActions, DialogTitle, withStyles} from "@material-ui/core";
-import {handleAuthClick} from "../actions/userActions";
+import { handleAuthClick } from "../thunks/user";
 
 const styles = theme => ({
     authDialog: {

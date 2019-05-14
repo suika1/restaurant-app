@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {handleAuthClick} from "../actions/userActions";
+import { handleAuthClick } from "../thunks/user";
 
 const styles = theme => ({
     profile: {

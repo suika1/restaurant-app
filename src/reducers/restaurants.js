@@ -2,7 +2,7 @@ import {
     GET_RESTAURANTS_REQUEST,
     GET_RESTAURANTS_ERROR,
     GET_RESTAURANTS_SUCCESS
-} from '../actions/mapRestaurantsActions';
+} from '../action-types/map-restaurants';
 
 const defaultState = {
     isFetching: false,

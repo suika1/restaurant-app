@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Map from '../components/Map';
-import {setNewCenterByClick} from "../actions/mapRestaurantsActions";
+import { setNewCenterByClick } from "../thunks/map-restaurants";
 
 const mapStateToProps = store => ({
     map: store.map,

@@ -1,7 +1,7 @@
-import {Button, Typography,
+import { Button, Typography,
  Dialog, DialogContent, DialogTitle, DialogActions} from "@material-ui/core";
 import React from "react";
-import {getAdditionalInfo} from "../actions/mapRestaurantsActions";
+import { getAdditionalInfo } from "../thunks/map-restaurants";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 

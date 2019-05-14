@@ -2,7 +2,7 @@ import {
     MAP_INITIALIZED,
     MAP_NEEDS_GEOLOCATION,
     MAP_CHANGE_CENTER
-} from '../actions/mapRestaurantsActions';
+} from '../action-types/map-restaurants';
 
 const defaultState = {
     error: '',
