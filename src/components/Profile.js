@@ -2,7 +2,7 @@ import React from 'react';
 import {Button, Typography} from '@material-ui/core';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import {handleAuthClick} from "../actions/userActions";
+import { handleAuthClick } from "../thunks/user";
 
 const styles = theme => ({
     profile: {
@@ -72,7 +72,7 @@ const styles = theme => ({
 
 class Profile extends React.PureComponent{
     renderAnonymous = () => {
-        let { classes } = this.props;
+        const { classes } = this.props;
         return (
             <div className={classes.profile}>
                 <div className={classes.about}>
@@ -85,8 +85,8 @@ class Profile extends React.PureComponent{
     };
 
     render(){
-        let { classes} = this.props;
-        let { imageUrl, fullName, email, initialized } = this.props.auth;
+        const { classes} = this.props;
+        const { imageUrl, fullName, email, initialized } = this.props.auth;
         if (fullName === ''){
             return this.renderAnonymous();
         }

@@ -87,7 +87,7 @@ class RestaurantSmallCard extends React.Component{
     };
 
     render(){
-        let {restaurant, classes} = this.props;
+        const { restaurant, classes } = this.props;
         return (
             <React.Fragment>
                 <RestaurantInfo

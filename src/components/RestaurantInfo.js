@@ -1,7 +1,7 @@
-import {Button, Typography,
+import { Button, Typography,
  Dialog, DialogContent, DialogTitle, DialogActions} from "@material-ui/core";
 import React from "react";
-import {getAdditionalInfo} from "../actions/mapRestaurantsActions";
+import { getAdditionalInfo } from "../thunks/map-restaurants";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -184,7 +184,7 @@ class RestaurantInfo extends React.Component{
         if(!this.state.additionalInfo || !this.state.additionalInfo.reviews) {
             return;
         }
-        let {classes} = this.props;
+        const { classes } = this.props;
         return (
             <DialogContent className={`${classes.dialogContent} ${classes.reviews}`}>
                 {this.state.additionalInfo.reviews.map((a, ind) =>(
@@ -207,8 +207,10 @@ class RestaurantInfo extends React.Component{
     };
 
     render(){
-        let { classes, open, handleClose,
-            title, openClosed, rating, vicinity } = this.props;
+        const {
+            classes, open, handleClose,
+            title, openClosed, rating, vicinity,
+        } = this.props;
         return (
             <Dialog
                 className={classes.dialog}
