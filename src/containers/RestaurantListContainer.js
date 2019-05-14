@@ -1,12 +1,10 @@
 import { connect } from 'react-redux';
 import RestaurantList from '../components/RestaurantList';
 
-const mapStateToProps = store => {
-    return {
-        restaurants: store.restaurants,
-        needsGeolocation: store.map.needsGeolocation,
-    }
-};
+const mapStateToProps = store => ({
+    restaurants: store.restaurants,
+    needsGeolocation: store.map.needsGeolocation,
+});
 
 const RestaurantListContainer = connect(
     mapStateToProps

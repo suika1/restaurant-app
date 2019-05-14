@@ -13,9 +13,18 @@ const defaultState = {
 export default function restaurants(state = defaultState, action) {
     switch (action.type) {
         case GET_RESTAURANTS_REQUEST:
-            return {...state, isFetching: true, error: ''};
+            return {
+                ...state,
+                isFetching: true,
+                error: '',
+            };
         case GET_RESTAURANTS_SUCCESS:
-            return {...state, isFetching: false, error: '', items: [...state.items, ...action.restaurants]};
+            return {
+                ...state,
+                isFetching: false,
+                error: '',
+                items: [...state.items, ...action.restaurants],
+            };
         case GET_RESTAURANTS_ERROR:
             return state;
         default:

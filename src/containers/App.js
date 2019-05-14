@@ -188,7 +188,7 @@ class App extends React.Component{
 
     //load Google's JS lib and let user authenticate
     attachAuthScript = () => {
-        let s = document.createElement('script');
+        const s = document.createElement('script');
         s.src = "https://apis.google.com/js/api.js";
         s.defer = true;
         s.onload = () => {
@@ -200,7 +200,7 @@ class App extends React.Component{
 
     //load Google Maps API Library
     attachMapScripts = () => {
-        let s = document.createElement('script');
+        const s = document.createElement('script');
         s.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBc0yLsAhKiyU2Cys9LVy0N4yA_t7AqF5E&libraries=places";
         s.defer = true;
         s.onload = () => {
@@ -211,7 +211,7 @@ class App extends React.Component{
     };
 
     checkAuthFromStorage = () => {
-        let storageProfile = loadAuthDataFromStorage();
+        const storageProfile = loadAuthDataFromStorage();
         if (storageProfile){
             this.props.authSignIn(storageProfile);
         }else{
@@ -277,7 +277,7 @@ class App extends React.Component{
 
     //render form for authentication
     renderAuthForm() {
-        let {auth} = this.props;
+        const { auth } = this.props;
         if(auth.initialized && !auth.fullName){
             return (<AuthForm/>)
         }
@@ -285,9 +285,9 @@ class App extends React.Component{
 
     //handler for mobile menu btn click
     onMenuBtnClick = () => {
-        let {link, toggledLink, linkWrapper, shadowMaker} = this.props.classes;
-        let linkWrapperElem = document.getElementsByClassName(linkWrapper)[0];
-        let shadowMakerElem = document.getElementsByClassName(shadowMaker)[0];
+        const { link, toggledLink, linkWrapper, shadowMaker } = this.props.classes;
+        const linkWrapperElem = document.getElementsByClassName(linkWrapper)[0];
+        const shadowMakerElem = document.getElementsByClassName(shadowMaker)[0];
 
         const makeVisible = () => {
             linkWrapperElem.style.left = '0';
@@ -332,8 +332,8 @@ class App extends React.Component{
     };
 
     render(){
-        let {classes} = this.props;
-        let pathName = this.props.location.pathname;
+        const { classes } = this.props;
+        const pathName = this.props.location.pathname;
         return(
             <div className={classes.app}>
                 <div className={classes.topMenu}>

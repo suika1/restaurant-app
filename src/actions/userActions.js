@@ -39,27 +39,25 @@ let GoogleAuth;
 const SCOPE = 'profile email'; //Giving access to basic data like name\email\avatar
 
 //initializes client with Google JS API
-function initClient(dispatch) {
-    return () => {
-        // Initialize the gapi.client object, which app uses to make API requests.
-        // Get API key and client ID from API Console.
-        // 'scope' field specifies space-delimited list of access scopes.
-        gapi.client.init({
-            'apiKey': 'AIzaSyBc0yLsAhKiyU2Cys9LVy0N4yA_t7AqF5E',
-            'discoveryDocs': [],
-            'clientId': '250951134431-44ianb9v3ks5gf368fsk6ppn3f3o2p85.apps.googleusercontent.com',
-            'scope': SCOPE
-        }).then(() => {
-            GoogleAuth = gapi.auth2.getAuthInstance();
+const initClient = (dispatch) => () =>{
+    // Initialize the gapi.client object, which app uses to make API requests.
+    // Get API key and client ID from API Console.
+    // 'scope' field specifies space-delimited list of access scopes.
+    gapi.client.init({
+        'apiKey': 'AIzaSyBc0yLsAhKiyU2Cys9LVy0N4yA_t7AqF5E',
+        'discoveryDocs': [],
+        'clientId': '250951134431-44ianb9v3ks5gf368fsk6ppn3f3o2p85.apps.googleusercontent.com',
+        'scope': SCOPE
+    }).then(() => {
+        GoogleAuth = gapi.auth2.getAuthInstance();
 
-            // Listen for sign-in state changes.
-            GoogleAuth.isSignedIn.listen(setSigninStatus(dispatch));
-        });
-    }
+        // Listen for sign-in state changes.
+        GoogleAuth.isSignedIn.listen(setSigninStatus(dispatch));
+    });
 }
 
 //handles sign-in\sign-out clicks
-export function handleAuthClick() {
+export const handleAuthClick = () => {
     try {
         if(GoogleAuth) {
             if (GoogleAuth.isSignedIn.get()) {
@@ -97,9 +95,7 @@ const setSigninStatus = dispatch => () => {
 };
 
 //callback, when script for Google JS API is loaded
-export function triggerGoogleLoaded() {
-    return dispatch => {
-        dispatch(authInitialized());
-        gapi.load('client:auth2', initClient(dispatch));
-    }
-}
+export const triggerGoogleLoaded = () => dispatch => {
+    dispatch(authInitialized());
+    gapi.load('client:auth2', initClient(dispatch));
+};

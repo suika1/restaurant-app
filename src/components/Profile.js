@@ -72,7 +72,7 @@ const styles = theme => ({
 
 class Profile extends React.PureComponent{
     renderAnonymous = () => {
-        let { classes } = this.props;
+        const { classes } = this.props;
         return (
             <div className={classes.profile}>
                 <div className={classes.about}>
@@ -85,8 +85,8 @@ class Profile extends React.PureComponent{
     };
 
     render(){
-        let { classes} = this.props;
-        let { imageUrl, fullName, email, initialized } = this.props.auth;
+        const { classes} = this.props;
+        const { imageUrl, fullName, email, initialized } = this.props.auth;
         if (fullName === ''){
             return this.renderAnonymous();
         }

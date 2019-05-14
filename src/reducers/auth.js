@@ -21,9 +21,18 @@ const defaultState = {
 export default function auth(state = defaultState, action) {
     switch (action.type) {
         case AUTH_INITIALIZED:
-            return {...state, initialized: true};
+            return {
+                ...state,
+                initialized: true,
+            };
         case AUTH_SIGNED_IN: {
-            let {name, familyName, fullName, imageUrl, email} = action.user;
+            const {
+                name,
+                familyName,
+                fullName,
+                imageUrl,
+                email,
+            } = action.user;
             return {
                 ...state,
                 error: '',
@@ -36,9 +45,16 @@ export default function auth(state = defaultState, action) {
             }
         }
         case AUTH_SIGNED_OUT:
-            return { ...defaultState, initialized: state.initialized };
+            return {
+                ...defaultState,
+                initialized: state.initialized,
+            };
         case SCRIPT_UPLOAD_ERROR:
-            return { ...defaultState, initialized: state.initialized, error: SCRIPT_UPLOAD_ERROR};
+            return {
+                ...defaultState,
+                initialized: state.initialized,
+                error: SCRIPT_UPLOAD_ERROR,
+            };
         default:
             return state
     }

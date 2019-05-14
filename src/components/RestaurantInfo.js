@@ -184,7 +184,7 @@ class RestaurantInfo extends React.Component{
         if(!this.state.additionalInfo || !this.state.additionalInfo.reviews) {
             return;
         }
-        let {classes} = this.props;
+        const { classes } = this.props;
         return (
             <DialogContent className={`${classes.dialogContent} ${classes.reviews}`}>
                 {this.state.additionalInfo.reviews.map((a, ind) =>(
@@ -207,8 +207,10 @@ class RestaurantInfo extends React.Component{
     };
 
     render(){
-        let { classes, open, handleClose,
-            title, openClosed, rating, vicinity } = this.props;
+        const {
+            classes, open, handleClose,
+            title, openClosed, rating, vicinity,
+        } = this.props;
         return (
             <Dialog
                 className={classes.dialog}

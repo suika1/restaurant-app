@@ -65,8 +65,8 @@ class Map extends React.Component{
         if (!this.state[OPEN_RESTAURANT_INFO]) {
             return;
         }
-        let restInfo = this.state.restaurantInfoData;
-        let {vicinity, name: title, rating, place_id: placeId} = restInfo;
+        const restInfo = this.state.restaurantInfoData;
+        const { vicinity, name: title, rating, place_id: placeId } = restInfo;
         let openClosed = '';
         if (restInfo.opening_hours){
             if (restInfo.opening_hours.open_now){

@@ -113,7 +113,7 @@ class RestaurantList extends React.Component {
     };
 
     componentDidMount = () => {
-        let listComponent = this.props.classes.listComponent;
+        const listComponent = this.props.classes.listComponent;
         document.getElementsByClassName(listComponent)[0].onscroll = () => {
             if (document.getElementsByClassName(listComponent)[0].scrollTop > 1) {
                 this.setState({displayScrollBtn: 'block'});
@@ -128,7 +128,7 @@ class RestaurantList extends React.Component {
     };
 
     renderList = () => {
-        let {classes, restaurants, needsGeolocation} = this.props;
+        const { classes, restaurants, needsGeolocation } = this.props;
         if (!restaurants.items) {
             return;
         }
@@ -151,7 +151,7 @@ class RestaurantList extends React.Component {
     };
 
     render(){
-        let {classes} = this.props;
+        const { classes } = this.props;
         return (
             <div className={classes.listComponent}>
                 <Fab

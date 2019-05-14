@@ -14,11 +14,24 @@ const defaultState = {
 export default function map(state = defaultState, action) {
     switch (action.type) {
         case MAP_INITIALIZED:
-            return {...state, initialized: true};
+            return {
+                ...state,
+                initialized: true,
+            };
         case MAP_NEEDS_GEOLOCATION:
-            return {...state, needsGeolocation: true};
+            return {
+                ...state,
+                needsGeolocation: true,
+            };
         case MAP_CHANGE_CENTER:
-            return {...state, needsGeolocation: false, center: {lat: action.center.lat, lng: action.center.lng}};
+            return {
+                ...state,
+                needsGeolocation: false,
+                center: {
+                    lat: action.center.lat,
+                    lng: action.center.lng,
+                },
+            };
         default:
             return state;
     }
