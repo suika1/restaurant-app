@@ -1,3 +1,3 @@
-## App is avaliable at https://cryptic-reaches-94266.herokuapp.com/map
+## App is avaliable at http://suika.ru/restaurant-app/
 
 ### Click on markers to get additional info about each restaurant
