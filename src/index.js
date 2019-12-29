@@ -22,8 +22,7 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
         <Router basename="/restaurant-app/">
             <Provider store={store}>
-//                 <App/>
-                <h3>Test jenkins</h3>
+                 <App/>
             </Provider>
         </Router>
     </MuiThemeProvider>
