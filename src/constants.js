@@ -61,22 +61,23 @@ export const STYLES = {
           "elementType": "labels.text.fill",
           "stylers": [
               {
-                  "color": "#781fda"
+                //   "color": "#781fda"
+                  "color": "#1e1e1e"
               }
           ]
       },
-      {
-          "featureType": "road",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "color": "#c9bac2"
-              },
-              {
-                  "weight": 2.5
-              }
-          ]
-      },
+    //   {
+    //       "featureType": "road",
+    //       "elementType": "labels.text.stroke",
+    //       "stylers": [
+    //           {
+    //               "color": "#c9bac2"
+    //           },
+    //           {
+    //               "weight": 2.5
+    //           }
+    //       ]
+    //   },
       {
           "featureType": "road.arterial",
           "elementType": "geometry",
@@ -121,22 +122,23 @@ export const STYLES = {
           "elementType": "labels.text.fill",
           "stylers": [
               {
-                  "color": "#e4c6fd"
+                //   "color": "#e4c6fd"
+                  "color": "#1e1e1e"
               }
           ]
       },
-      {
-          "featureType": "transit",
-          "elementType": "labels.text.stroke",
-          "stylers": [
-              {
-                  "color": "#2b044a"
-              },
-              {
-                  "weight": 2
-              }
-          ]
-      },
+    //   {
+    //       "featureType": "transit",
+    //       "elementType": "labels.text.stroke",
+    //       "stylers": [
+    //           {
+    //               "color": "#2b044a"
+    //           },
+    //           {
+    //               "weight": 2
+    //           }
+    //       ]
+    //   },
       {
           "featureType": "administrative.land_parcel",
           "stylers": [
