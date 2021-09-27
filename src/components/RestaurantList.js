@@ -137,11 +137,11 @@ class RestaurantList extends React.Component {
                 <div className={classes.relocateContainer}>
                     <Typography variant='h4'>You need to select place in which you are located.</Typography>
                     <NavLink className={classes.relocateMessage} to='map'><Fab className={classes.relocateBtn}>Go</Fab></NavLink>
-            </div>
+                </div>
             )
         }
 
-        return restaurants.items.map(a => (<RestaurantSmallCard key={a.id} restaurant={a}/>));
+        return restaurants.items.map(a => (<RestaurantSmallCard key={a.place_id} restaurant={a}/>));
     };
 
     renderLoading = () => {
@@ -177,7 +177,7 @@ RestaurantList.propTypes = {
         isFetching: PropTypes.bool.isRequired,
         items: PropTypes.arrayOf(
             PropTypes.shape({
-                id: PropTypes.string.isRequired,
+                place_id: PropTypes.string.isRequired,
                 photos: PropTypes.array,
                 name: PropTypes.string.isRequired,
                 rating: PropTypes.number,

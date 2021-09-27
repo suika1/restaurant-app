@@ -69,7 +69,7 @@ class Map extends React.Component{
         const { vicinity, name: title, rating, place_id: placeId } = restInfo;
         let openClosed = '';
         if (restInfo.opening_hours){
-            if (restInfo.opening_hours.open_now){
+            if (restInfo.opening_hours.isOpen()){
                 openClosed = 'Open';
             }else{
                 openClosed = 'Closed';

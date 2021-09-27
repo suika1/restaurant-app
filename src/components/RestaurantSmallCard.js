@@ -77,7 +77,7 @@ class RestaurantSmallCard extends React.Component{
         if (!restaurant.opening_hours) {
             return;
         }
-        if (restaurant.opening_hours.open_now){
+        if (restaurant.opening_hours.isOpen()){
             this.openClosed = 'Open';
             return (<Typography variant='h5'>Open</Typography>)
         }else{
@@ -118,7 +118,6 @@ class RestaurantSmallCard extends React.Component{
 
 RestaurantSmallCard.propTypes = {
     restaurant: PropTypes.shape({
-        id: PropTypes.string.isRequired,
         photos: PropTypes.array,
         name: PropTypes.string.isRequired,
         rating: PropTypes.number,

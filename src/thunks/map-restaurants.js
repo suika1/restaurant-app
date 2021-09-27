@@ -107,8 +107,8 @@ export const createMarkers = (places, map, callback) => {
 // eslint-disable-next-line no-cond-assign
   for (let i = 0, place; place = places[i]; i++) {
       let image = {
-          url: './img/noun_Restaurant_368075.png',
-          size: new window.google.maps.Size(71, 71),
+          url: '/img/noun_Restaurant_368075.png',
+          size: new window.google.maps.Size(45, 45),
           origin: new window.google.maps.Point(0, 0),
           anchor: new window.google.maps.Point(17, 34),
           scaledSize: new window.google.maps.Size(45, 45)
