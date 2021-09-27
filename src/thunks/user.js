@@ -11,7 +11,7 @@ const initClient = (dispatch) => () =>{
     window.gapi.client.init({
         'apiKey': 'AIzaSyBc0yLsAhKiyU2Cys9LVy0N4yA_t7AqF5E',
         'discoveryDocs': [],
-        'clientId': '250951134431-48ro4cs9tmbggpndk4k5v58rvquevvt2.apps.googleusercontent.com',
+        'clientId': '250951134431-44ianb9v3ks5gf368fsk6ppn3f3o2p85.apps.googleusercontent.com',
         'scope': SCOPE
     }).then(() => {
         GoogleAuth = window.gapi.auth2.getAuthInstance();
